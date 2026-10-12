@@ -15,7 +15,7 @@ document.querySelectorAll('[data-step]').forEach(button => button.addEventListen
  const s=steps[Number(button.dataset.step)]; const num=document.getElementById('step-num');num.replaceChildren(document.createTextNode(s[0]));const unit=document.createElement('span');unit.textContent=s[1];num.append(unit);document.getElementById('step-title').textContent=s[2];document.getElementById('step-copy').textContent=s[3];
 }));
 const evidence=document.getElementById('evidence');
-document.querySelectorAll('[data-evidence]').forEach(button=>button.addEventListener('click',event=>{event.preventDefault();const isDouyin=button.dataset.evidence==='dy';evidence.querySelector('img').src=isDouyin?'assets/source-1.png':'assets/source-2.png';evidence.querySelector('img').alt=isDouyin?'是亮亮抖音主页截图':'是亮亮小红书主页截图';evidence.querySelector('p').textContent='用户提供的账号主页截图';evidence.showModal();}));
+document.querySelectorAll('[data-evidence]').forEach(button=>button.addEventListener('click',event=>{event.preventDefault();evidence.classList.remove('triptych-evidence');evidence.style.removeProperty('--film-segment');const isDouyin=button.dataset.evidence==='dy';evidence.querySelector('img').src=isDouyin?'assets/source-1.png':'assets/source-2.png';evidence.querySelector('img').alt=isDouyin?'是亮亮抖音主页截图':'是亮亮小红书主页截图';evidence.querySelector('p').textContent='用户提供的账号主页截图';evidence.showModal();}));
 evidence.querySelector('.close-dialog').addEventListener('click',()=>evidence.close());evidence.addEventListener('click',event=>{if(event.target===evidence)evidence.close();});
 
 // Keep every section at exactly 16:9, including narrow screens.
@@ -76,10 +76,13 @@ if(!reduceMotion.matches&&'IntersectionObserver' in window){
 function animateChange(element){if(!reduceMotion.matches)element.animate([{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'translateY(0)'}],{duration:260,easing:'cubic-bezier(.2,.7,.2,1)'});}
 document.querySelectorAll('[data-step]').forEach(button=>button.addEventListener('click',()=>{animateChange(document.querySelector('.timeline-detail'));if(!reduceMotion.matches)button.querySelector('.circle').animate([{transform:'scale(.96)'},{transform:'scale(1.06)'},{transform:'scale(1)'}],{duration:340,easing:'ease-out'});}));
 filters.forEach(button=>button.addEventListener('click',()=>document.querySelectorAll('.account:not([hidden])').forEach(animateChange)));
+// Use the same three color crops in the enlarged photo viewer.
+const evidencePhotoWindow=document.createElement('div');evidencePhotoWindow.className='evidence-photo-window';
+const evidencePhoto=evidence.querySelector('img');evidencePhoto.before(evidencePhotoWindow);evidencePhotoWindow.append(evidencePhoto);
 // Enlarge report images without leaving the page.
 document.querySelectorAll('.cover-photo-window img,.profile-film img,.dossier-portrait img,.work-visual img,.fashion-visual img').forEach(img=>{
  img.classList.add('zoomable-image');img.setAttribute('role','button');img.setAttribute('tabindex','0');img.setAttribute('aria-label','放大查看：'+img.alt);
- const open=()=>{evidence.querySelector('img').src=img.src;evidence.querySelector('img').alt=img.alt;evidence.querySelector('p').textContent='用户提供的报告图片';evidence.showModal();};
+ const open=()=>{const segment=img.dataset.filmSegment;evidence.classList.toggle('triptych-evidence',segment!==undefined);if(segment!==undefined)evidence.style.setProperty('--film-segment',segment);evidence.querySelector('img').src=img.src;evidence.querySelector('img').alt=img.alt;evidence.querySelector('p').textContent='用户提供的报告图片';evidence.showModal();};
  img.addEventListener('click',open);img.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();open();}});
 });
 
