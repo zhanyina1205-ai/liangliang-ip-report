@@ -38,7 +38,7 @@ fullDocument.addEventListener('click',event=>{if(event.target===fullDocument)ful
 // Presentation navigation and subtle motion, respecting reduced-motion preferences.
 const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
 const pages=Array.from(document.querySelectorAll('.report-page'));
-const chapterNames=['案例封面','IP 定位','项目概览','账号分工','历史增长','作品拆解','穿搭展示','数据复盘','商业与方法','案例依据'];
+const chapterNames=['案例封面','IP 定位','项目概览','账号分工','穿搭海报','历史增长','作品拆解','穿搭展示','数据复盘','商业与方法','案例依据'];
 const progress=document.createElement('div');progress.className='reading-progress';progress.setAttribute('role','progressbar');progress.setAttribute('aria-label','报告阅读进度');progress.setAttribute('aria-valuemin','1');progress.setAttribute('aria-valuemax',String(pages.length));const progressFill=document.createElement('span');progress.append(progressFill);document.body.append(progress);
 const reader=document.createElement('div');reader.className='reader-controls';reader.setAttribute('aria-label','报告翻页');
 reader.innerHTML='<button class="reader-prev" aria-label="上一页">←</button><button class="chapter-toggle" aria-expanded="false" aria-controls="chapter-menu"><span class="reader-number">01 / '+String(pages.length).padStart(2,'0')+'</span><span class="reader-title">封面</span><span class="reader-chevron">⌃</span></button><button class="reader-next" aria-label="下一页">→</button><div id="chapter-menu" class="chapter-menu" hidden></div>';
@@ -136,3 +136,33 @@ lookPreview.querySelector('.look-prev').addEventListener('click',()=>showLook(ac
 lookPreview.querySelector('.look-next').addEventListener('click',()=>showLook(activeLook+1));
 lookPreview.addEventListener('click',event=>{if(event.target===lookPreview)lookPreview.close();});
 lookPreview.addEventListener('keydown',event=>{if(event.key==='ArrowRight'||event.key==='ArrowLeft'){event.preventDefault();event.stopPropagation();showLook(activeLook+(event.key==='ArrowRight'?1:-1));}});
+
+// A fashion-diary collage between the account matrix and the growth timeline.
+const stylePoster=document.getElementById('style-diary');
+let posterLook=0,posterTimer=null;
+function setPosterLook(index){
+ posterLook=(index+fashionLooks.length)%fashionLooks.length;
+ const look=fashionLooks[posterLook],photo=stylePoster.querySelector('.poster-main-photo');
+ photo.src='assets/look-'+look.key+'.png';photo.alt='是亮亮全身穿搭：'+look.title;
+ stylePoster.querySelector('.poster-look-title').textContent=look.title;
+ stylePoster.querySelector('.poster-track-count').textContent='LOOK '+String(posterLook+1).padStart(2,'0')+' / 05';
+ stylePoster.querySelector('.poster-track-line i').style.width=((posterLook+1)/fashionLooks.length*100)+'%';
+ if(!reduceMotion.matches)photo.animate([{opacity:.15,transform:'translateX(-50%) translateY(6px)'},{opacity:1,transform:'translateX(-50%) translateY(0)'}],{duration:300,easing:'ease-out'});
+}
+function stopPoster(){
+ clearInterval(posterTimer);posterTimer=null;const button=stylePoster.querySelector('.poster-play');button.textContent='▶';button.setAttribute('aria-label','自动轮播穿搭');button.setAttribute('aria-pressed','false');
+}
+stylePoster.querySelector('.poster-prev').addEventListener('click',()=>{stopPoster();setPosterLook(posterLook-1);});
+stylePoster.querySelector('.poster-next').addEventListener('click',()=>{stopPoster();setPosterLook(posterLook+1);});
+stylePoster.querySelector('.poster-play').addEventListener('click',()=>{
+ if(posterTimer){stopPoster();return;}
+ const button=stylePoster.querySelector('.poster-play');button.textContent='Ⅱ';button.setAttribute('aria-label','暂停轮播穿搭');button.setAttribute('aria-pressed','true');
+ posterTimer=setInterval(()=>setPosterLook(posterLook+1),3500);
+});
+stylePoster.querySelector('.poster-zoom').addEventListener('click',()=>{stopPoster();showLook(posterLook);lookPreview.showModal();});
+stylePoster.querySelectorAll('[data-poster-look]').forEach(button=>button.addEventListener('click',()=>{stopPoster();const i=Number(button.dataset.posterLook);setPosterLook(i);showLook(i);lookPreview.showModal();}));
+stylePoster.querySelector('.poster-photo-beach').addEventListener('click',()=>{
+ stopPoster();evidence.classList.remove('triptych-evidence');evidence.style.removeProperty('--film-segment');const source=stylePoster.querySelector('.poster-photo-beach img');evidence.querySelector('img').src=source.src;evidence.querySelector('img').alt=source.alt;evidence.querySelector('p').textContent='用户提供的人物照片';evidence.showModal();
+});
+new IntersectionObserver(entries=>{if(!entries[0].isIntersecting)stopPoster();},{threshold:.05}).observe(stylePoster);
+document.addEventListener('visibilitychange',()=>{if(document.hidden)stopPoster();});
