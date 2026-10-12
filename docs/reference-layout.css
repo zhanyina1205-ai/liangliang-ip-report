@@ -1,8 +1,12 @@
-/* Locally embedded Noto Serif SC subsets, SIL OFL 1.1. */
 @font-face{font-family:ArtSong;src:url('assets/art-song-300.woff2') format('woff2');font-style:normal;font-weight:300;font-display:swap}
 @font-face{font-family:ArtSong;src:url('assets/art-song-400.woff2') format('woff2');font-style:normal;font-weight:400;font-display:swap}
 @font-face{font-family:ArtSong;src:url('assets/art-song-500.woff2') format('woff2');font-style:normal;font-weight:500;font-display:swap}
 @font-face{font-family:ArtSong;src:url('assets/art-song-600.woff2') format('woff2');font-style:normal;font-weight:600;font-display:swap}
+/* Locally embedded Noto Serif SC subsets, SIL OFL 1.1. */
+
+
+
+
 /* Scrapbook presentation layout, inspired by the supplied About Me reference. */
 :root{--ink:#423a31;--muted:#7c6960;--paper:#faf5df;--pink:#efcdca;--mint:#c9ded5;--base:#ead4d0;--line:#d8b9b3}
 body{background:var(--base)}.site-header{height:76px}.report-page{border:1px solid #f9e7df;box-shadow:0 4px 10px #765b5430;border-radius:10px;margin-bottom:30px}.report-page>section{border-radius:8px}.profile-grid,.commerce-grid{background:var(--base);gap:26px}.profile-grid>article,.commerce-grid>article{border:1px solid #f9e7df;box-shadow:0 3px 9px #765b5420}
