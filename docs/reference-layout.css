@@ -61,7 +61,7 @@ body{font-weight:400}
 .work-copy h3,.insight-split h3,.content-notes h3{font-weight:500}
 
 /* Five original outfit cutouts, arranged as an editorial lineup. */
-.lookbook{padding:33px 43px;background:var(--paper)}
+.lookbook{padding:33px 43px;background-color:#faf5df;background-image:none}
 .lookbook-heading{display:flex;align-items:center;justify-content:space-between;margin:12px 0 7px}
 .lookbook h2.script{font-size:83px;margin:0;color:var(--mint);-webkit-text-stroke:1px var(--ink);text-shadow:1px 2px 0 var(--ink)}
 .lookbook-heading p{margin:0;font-size:12px;line-height:1.8;text-align:right}
