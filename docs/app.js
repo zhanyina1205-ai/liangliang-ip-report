@@ -38,7 +38,7 @@ fullDocument.addEventListener('click',event=>{if(event.target===fullDocument)ful
 // Presentation navigation and subtle motion, respecting reduced-motion preferences.
 const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
 const pages=Array.from(document.querySelectorAll('.report-page'));
-const chapterNames=['案例封面','IP 定位','项目概览','账号分工','历史增长','作品拆解','数据复盘','商业与方法','案例依据'];
+const chapterNames=['案例封面','IP 定位','项目概览','账号分工','历史增长','作品拆解','穿搭展示','数据复盘','商业与方法','案例依据'];
 const progress=document.createElement('div');progress.className='reading-progress';progress.setAttribute('role','progressbar');progress.setAttribute('aria-label','报告阅读进度');progress.setAttribute('aria-valuemin','1');progress.setAttribute('aria-valuemax',String(pages.length));const progressFill=document.createElement('span');progress.append(progressFill);document.body.append(progress);
 const reader=document.createElement('div');reader.className='reader-controls';reader.setAttribute('aria-label','报告翻页');
 reader.innerHTML='<button class="reader-prev" aria-label="上一页">←</button><button class="chapter-toggle" aria-expanded="false" aria-controls="chapter-menu"><span class="reader-number">01 / '+String(pages.length).padStart(2,'0')+'</span><span class="reader-title">封面</span><span class="reader-chevron">⌃</span></button><button class="reader-next" aria-label="下一页">→</button><div id="chapter-menu" class="chapter-menu" hidden></div>';
@@ -114,3 +114,25 @@ cover.addEventListener('pointermove',event=>{
 },{passive:true});
 cover.addEventListener('pointerleave',()=>{cancelAnimationFrame(coverPointerFrame);resetCoverDepth();});
 reduceMotion.addEventListener('change',resetCoverDepth);
+
+// Explore the five supplied outfits without leaving the case study.
+const fashionLooks=[{"key": "gingham", "title": "蓝白格纹", "items": "吊带 · 格纹裙 · 运动鞋", "description": "浅粉与蓝白格纹搭配，黄色肩包提供明亮点缀。", "source": "look-source-1.png"}, {"key": "cherry", "title": "樱桃红点", "items": "印花上衣 · 短裙 · 玛丽珍鞋", "description": "红色印花与小包呼应，黑色短裙和鞋子收住整体色彩。", "source": "look-source-2.png"}, {"key": "navy", "title": "藏蓝学院", "items": "泡泡袖 · 百褶短裙 · 乐福鞋", "description": "白色泡泡袖与藏蓝裙装形成对比，腰带与长袜完成学院感。", "source": "look-source-3.png"}, {"key": "blue", "title": "浅蓝层次", "items": "浅蓝上衣 · 蛋糕裙 · 长袜", "description": "浅蓝与白色搭配，裙装的层次和肩部系带增加细节。", "source": "look-source-3.png"}, {"key": "pleats", "title": "夏日百褶", "items": "图案 T 恤 · 百褶裙 · 运动鞋", "description": "白色图案 T 恤配深色百褶裙，用运动鞋呈现轻松日常。", "source": "look-source-4.png"}];
+const lookPreview=document.getElementById('look-preview');
+let activeLook=0;
+function showLook(index){
+ activeLook=(index+fashionLooks.length)%fashionLooks.length;
+ const look=fashionLooks[activeLook];const photo=lookPreview.querySelector('img');
+ photo.src='assets/look-'+look.key+'.png';photo.alt='是亮亮全身穿搭：'+look.title;
+ lookPreview.querySelector('h2').textContent=look.title;
+ lookPreview.querySelector('.look-preview-items').textContent=look.items;
+ lookPreview.querySelector('.look-preview-description').textContent=look.description;
+ lookPreview.querySelector('.look-preview-count').textContent='LOOK '+String(activeLook+1).padStart(2,'0')+' / 05';
+ lookPreview.querySelector('.look-original').href='assets/'+look.source;
+ if(!reduceMotion.matches)photo.animate([{opacity:.3,transform:'translateX(9px)'},{opacity:1,transform:'translateX(0)'}],{duration:220,easing:'ease-out'});
+}
+document.querySelectorAll('[data-look]').forEach(button=>button.addEventListener('click',()=>{showLook(Number(button.dataset.look));lookPreview.showModal();}));
+lookPreview.querySelector('.close-look-preview').addEventListener('click',()=>lookPreview.close());
+lookPreview.querySelector('.look-prev').addEventListener('click',()=>showLook(activeLook-1));
+lookPreview.querySelector('.look-next').addEventListener('click',()=>showLook(activeLook+1));
+lookPreview.addEventListener('click',event=>{if(event.target===lookPreview)lookPreview.close();});
+lookPreview.addEventListener('keydown',event=>{if(event.key==='ArrowRight'||event.key==='ArrowLeft'){event.preventDefault();event.stopPropagation();showLook(activeLook+(event.key==='ArrowRight'?1:-1));}});

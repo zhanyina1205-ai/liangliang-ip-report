@@ -59,3 +59,39 @@ body{font-weight:400}
 .profile-name{letter-spacing:3px}
 .lead,.quote,.account h3,.body-metrics strong{font-weight:400}
 .work-copy h3,.insight-split h3,.content-notes h3{font-weight:500}
+
+/* Five original outfit cutouts, arranged as an editorial lineup. */
+.lookbook{padding:33px 43px;background:#fffdfa}
+.lookbook-heading{display:flex;align-items:center;justify-content:space-between;margin:12px 0 7px}
+.lookbook h2.script{font-size:83px;margin:0;color:var(--mint);-webkit-text-stroke:1px var(--ink);text-shadow:1px 2px 0 var(--ink)}
+.lookbook-heading p{margin:0;font-size:12px;line-height:1.8;text-align:right}
+.lookbook-heading p span{font-size:10px;color:var(--muted)}
+.look-lineup{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:15px;align-items:end;margin-top:13px}
+.look-card{display:block;border:0;background:none;padding:0;min-width:0;text-align:left;border-radius:8px;position:relative}
+.look-figure{display:block;position:relative;height:414px;border-bottom:1px solid #e5d4cc}
+.look-figure img{height:100%;width:auto;max-width:none;position:absolute;left:50%;bottom:0;pointer-events:none;object-fit:contain;object-position:center bottom;transform:translateX(-50%);filter:drop-shadow(2px 3px 0 #d7cec780);transform-origin:50% 100%;transition:transform .35s cubic-bezier(.2,.7,.2,1),filter .35s}
+.look-card:hover .look-figure img,.look-card:focus-visible .look-figure img{transform:translateX(-50%) translateY(-7px) rotate(-1deg);filter:drop-shadow(4px 7px 0 #d7cec780)}
+.look-card:nth-child(even):hover .look-figure img,.look-card:nth-child(even):focus-visible .look-figure img{transform:translateX(-50%) translateY(-7px) rotate(1deg)}
+.look-plus{position:absolute;right:4px;top:30%;display:grid;place-items:center;width:28px;height:28px;background:#6d685bd9;color:white;font:18px Georgia,serif;border-radius:50%;transition:background .25s,transform .25s}
+.look-card:hover .look-plus,.look-card:focus-visible .look-plus{background:#aa7783;transform:rotate(90deg)}
+.look-label{display:grid;grid-template-columns:auto 1fr;gap:3px 9px;padding:10px 1px 0}
+.look-label small{font-family:DM,sans-serif;font-size:8px;letter-spacing:1px;color:#a68078;align-self:center}
+.look-label strong{font-weight:500;font-size:13px}
+.look-label>span{grid-column:1/-1;font-size:9px;color:var(--muted)}
+.lookbook-footnote{font-size:9px;color:var(--muted);margin:17px 0 0;letter-spacing:.3px}
+#look-preview{width:min(900px,92vw);max-width:900px;padding:34px;background:#fffdfa;border-radius:20px}
+.close-look-preview{position:absolute;right:16px;top:9px;border:0;background:none;font-size:28px;z-index:2}
+.look-preview-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:36px;align-items:center}
+.look-preview-photo{position:relative;background:#f6ede6;border-radius:150px 150px 16px 16px;padding:12px 12px 34px}
+.look-preview-photo img{height:min(65vh,530px);width:100%;object-fit:contain;filter:drop-shadow(3px 4px 0 #d7cec770)}
+.look-preview-count{position:absolute;bottom:10px;left:0;right:0;text-align:center;font-size:10px;letter-spacing:2px}
+.look-preview-copy h2{font-family:ArtSong,"Songti SC",serif;font-size:34px;line-height:1.5;font-weight:500;margin:20px 0 10px}
+.look-preview-copy p{text-align:left;font-size:14px;line-height:1.9}
+.look-preview-items{color:#a68078}
+.look-preview-description{margin:25px 0}
+.look-original{display:inline-block;font-size:12px;border-bottom:1px solid #ad8b80}
+.look-preview-nav{display:flex;justify-content:space-between;gap:10px;margin-top:38px}
+.look-preview-nav button{border:1px solid #d1b5aa;border-radius:24px;background:var(--paper);padding:9px 16px;font-size:12px}
+@media(max-width:600px){#look-preview{padding:30px 18px 20px;max-height:90vh;overflow:auto}.look-preview-grid{grid-template-columns:1fr;gap:13px}.look-preview-photo{border-radius:110px 110px 12px 12px}.look-preview-photo img{height:42vh}.look-preview-copy h2{font-size:24px;margin:10px 0}.look-preview-copy p{font-size:12px;margin:9px 0}.look-preview-nav{margin-top:18px}.look-preview-copy .index{font-size:9px}}
+@media(prefers-reduced-motion:reduce){.look-figure img,.look-plus{transition:none}.look-card:hover .look-figure img,.look-card:focus-visible .look-figure img,.look-card:nth-child(even):hover .look-figure img,.look-card:nth-child(even):focus-visible .look-figure img{transform:translateX(-50%)}.look-card:hover .look-plus,.look-card:focus-visible .look-plus{transform:none}}
+@media print{#look-preview{display:none}.look-plus{display:none}}
