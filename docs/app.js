@@ -77,8 +77,37 @@ function animateChange(element){if(!reduceMotion.matches)element.animate([{opaci
 document.querySelectorAll('[data-step]').forEach(button=>button.addEventListener('click',()=>{animateChange(document.querySelector('.timeline-detail'));if(!reduceMotion.matches)button.querySelector('.circle').animate([{transform:'scale(.96)'},{transform:'scale(1.06)'},{transform:'scale(1)'}],{duration:340,easing:'ease-out'});}));
 filters.forEach(button=>button.addEventListener('click',()=>document.querySelectorAll('.account:not([hidden])').forEach(animateChange)));
 // Enlarge report images without leaving the page.
-document.querySelectorAll('.cover-photo-window img,.cover-mini img,.profile-film img,.dossier-portrait img,.work-visual img,.fashion-visual img').forEach(img=>{
+document.querySelectorAll('.cover-photo-window img,.profile-film img,.dossier-portrait img,.work-visual img,.fashion-visual img').forEach(img=>{
  img.classList.add('zoomable-image');img.setAttribute('role','button');img.setAttribute('tabindex','0');img.setAttribute('aria-label','放大查看：'+img.alt);
  const open=()=>{evidence.querySelector('img').src=img.src;evidence.querySelector('img').alt=img.alt;evidence.querySelector('p').textContent='用户提供的报告图片';evidence.showModal();};
  img.addEventListener('click',open);img.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();open();}});
 });
+
+// Cover interactions: switch the photograph, begin reading, and gentle pointer depth.
+const cover=document.querySelector('.cover-collage');
+const coverPhoto=cover.querySelector('.cover-photo-window img');
+const coverMini=cover.querySelector('.cover-mini');
+cover.querySelector('.cover-ticket').addEventListener('click',()=>goToPage(1));
+coverMini.addEventListener('click',()=>{
+ const miniImg=coverMini.querySelector('img');
+ const current={src:coverPhoto.getAttribute('src'),alt:coverPhoto.alt};
+ coverPhoto.src=miniImg.getAttribute('src');coverPhoto.alt=miniImg.alt;
+ coverPhoto.setAttribute('aria-label','放大查看：'+coverPhoto.alt);
+ miniImg.src=current.src;miniImg.alt=current.alt;
+ if(!reduceMotion.matches)coverPhoto.animate([{opacity:.25},{opacity:1}],{duration:340,easing:'ease-out'});
+});
+let coverPointerFrame=0;
+function resetCoverDepth(){
+ ['--cover-move-x','--cover-move-y','--cover-tilt-x','--cover-tilt-y'].forEach(name=>cover.style.removeProperty(name));
+}
+cover.addEventListener('pointermove',event=>{
+ if(reduceMotion.matches||event.pointerType!=='mouse')return;
+ cancelAnimationFrame(coverPointerFrame);
+ const r=cover.getBoundingClientRect();const x=(event.clientX-r.left)/r.width-.5;const y=(event.clientY-r.top)/r.height-.5;
+ coverPointerFrame=requestAnimationFrame(()=>{
+  cover.style.setProperty('--cover-move-x',(x*12).toFixed(2)+'px');cover.style.setProperty('--cover-move-y',(y*9).toFixed(2)+'px');
+  cover.style.setProperty('--cover-tilt-x',(-y*3).toFixed(2)+'deg');cover.style.setProperty('--cover-tilt-y',(x*4).toFixed(2)+'deg');
+ });
+},{passive:true});
+cover.addEventListener('pointerleave',()=>{cancelAnimationFrame(coverPointerFrame);resetCoverDepth();});
+reduceMotion.addEventListener('change',resetCoverDepth);
