@@ -38,7 +38,7 @@ fullDocument.addEventListener('click',event=>{if(event.target===fullDocument)ful
 // Presentation navigation and subtle motion, respecting reduced-motion preferences.
 const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
 const pages=Array.from(document.querySelectorAll('.report-page'));
-const chapterNames=['封面','人物与IP','个人资料','账号矩阵','成长时间轴','代表作品','受众与表现','商业与对标','来源与全文'];
+const chapterNames=['案例封面','IP 定位','项目概览','账号分工','历史增长','作品拆解','数据复盘','商业与方法','案例依据'];
 const progress=document.createElement('div');progress.className='reading-progress';progress.setAttribute('role','progressbar');progress.setAttribute('aria-label','报告阅读进度');progress.setAttribute('aria-valuemin','1');progress.setAttribute('aria-valuemax',String(pages.length));const progressFill=document.createElement('span');progress.append(progressFill);document.body.append(progress);
 const reader=document.createElement('div');reader.className='reader-controls';reader.setAttribute('aria-label','报告翻页');
 reader.innerHTML='<button class="reader-prev" aria-label="上一页">←</button><button class="chapter-toggle" aria-expanded="false" aria-controls="chapter-menu"><span class="reader-number">01 / '+String(pages.length).padStart(2,'0')+'</span><span class="reader-title">封面</span><span class="reader-chevron">⌃</span></button><button class="reader-next" aria-label="下一页">→</button><div id="chapter-menu" class="chapter-menu" hidden></div>';
