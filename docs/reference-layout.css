@@ -61,7 +61,7 @@ body{font-weight:400}
 .work-copy h3,.insight-split h3,.content-notes h3{font-weight:500}
 
 /* Five original outfit cutouts, arranged as an editorial lineup. */
-.lookbook{padding:33px 43px;background:#fffdfa}
+.lookbook{padding:33px 43px;background:var(--paper)}
 .lookbook-heading{display:flex;align-items:center;justify-content:space-between;margin:12px 0 7px}
 .lookbook h2.script{font-size:83px;margin:0;color:var(--mint);-webkit-text-stroke:1px var(--ink);text-shadow:1px 2px 0 var(--ink)}
 .lookbook-heading p{margin:0;font-size:12px;line-height:1.8;text-align:right}
@@ -96,30 +96,45 @@ body{font-weight:400}
 @media(prefers-reduced-motion:reduce){.look-figure img,.look-plus{transition:none}.look-card:hover .look-figure img,.look-card:focus-visible .look-figure img,.look-card:nth-child(even):hover .look-figure img,.look-card:nth-child(even):focus-visible .look-figure img{transform:translateX(-50%)}.look-card:hover .look-plus,.look-card:focus-visible .look-plus{transform:none}}
 @media print{#look-preview{display:none}.look-plus{display:none}}
 
-/* Soft desktop-poster collage, based on the supplied pink-and-dot reference. */
-.style-poster{background-color:#fff;background-image:radial-gradient(circle,#d3d2d0a3 0 6px,transparent 7px);background-size:78px 75px;color:#565450}
-.poster-browser{height:59px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;background:#fffefefa;box-shadow:0 5px 10px #76747218;position:relative;z-index:3}
-.poster-window-dots{display:flex;gap:13px}.poster-window-dots i{display:grid;place-items:center;width:29px;height:29px;border-radius:50%;background:#fff;font:23px Georgia,serif;color:#81817d;box-shadow:0 2px 7px #5d5d5b25}
-.poster-address{background:#fff;border-radius:15px;box-shadow:inset 0 0 5px #75757020,0 2px 7px #72716e19;padding:8px 90px;font-family:DM,sans-serif;font-size:13px;color:#888581;letter-spacing:2px}
-.poster-next-page{font-size:12px;letter-spacing:1px}.poster-next-page:hover{color:#c97e9e}
-.poster-notes{position:absolute;left:58px;top:98px;width:294px;padding:29px 19px 20px;border:2px dashed #8b8885;background:#fffefed9;transform:rotate(-1deg);z-index:2}
-.poster-notes-title{position:absolute;top:-16px;left:71px;border-radius:22px;padding:3px 19px;background:#969592;color:#fff;font:bold 13px DM,sans-serif}
-.poster-notes p{font-size:19px;line-height:1.7;margin:0 0 12px;text-align:left}
-.poster-highlight{display:inline-block;padding:1px 7px;background:#efc8d9;border-left:3px solid #d479a2;font:15px Georgia,serif;line-height:1.7}
-.poster-corner{position:absolute;width:12px;height:12px;background:#f7c4df;border:1px solid #8b8885}.corner-a{top:-7px;left:-7px}.corner-b{top:-7px;right:-7px}.corner-c{bottom:-7px;left:-7px}.corner-d{bottom:-7px;right:-7px}
-.poster-main{position:absolute;left:365px;top:88px;width:430px;height:535px;z-index:1}
-.poster-selection{position:absolute;inset:0;width:100%;height:100%;overflow:visible;transform:rotate(-1deg)}
-.poster-selection polygon{fill:#f3d7e6b3;stroke:#e69dbf;stroke-width:3}.poster-selection rect{fill:#fff;stroke:#e69dbf;stroke-width:3}
-.poster-main-photo{position:absolute;left:50%;bottom:0;height:100%;width:auto;max-width:none;transform:translateX(-50%);filter:drop-shadow(1px 2px 0 #fff8)}
-.poster-zoom{position:absolute;right:21px;top:230px;z-index:2;background:#fffdfef2;border:1px solid #df9dbb;border-radius:50%;width:30px;height:30px;color:#b46d91;font-size:19px;transition:transform .2s}.poster-zoom:hover{transform:scale(1.15)}
-.poster-photo{position:absolute;border:0;background:transparent;padding:0;z-index:2;transition:transform .3s}.poster-photo>span{display:block;background:#fff;padding:5px;border-radius:3px;box-shadow:0 5px 16px #54524d25;overflow:hidden}.poster-photo img{width:100%;height:100%;object-fit:cover}.poster-photo small{display:block;font:12px DM,sans-serif;text-align:center;color:#716c69;margin-top:7px}.poster-photo:hover{transform:translateY(-5px) rotate(0deg)}
-.poster-photo-beach{left:92px;top:349px;width:157px;transform:rotate(3deg)}.poster-photo-beach>span{height:187px}.poster-photo-beach img{object-position:50% 28%}
-.poster-photo-cherry{right:186px;top:88px;width:128px;transform:rotate(-4deg)}.poster-photo-cherry>span{height:185px;background:#faf3ee;position:relative}.poster-photo-cherry img{height:200%;width:auto;max-width:none;position:absolute;left:50%;top:1%;transform:translateX(-50%);object-fit:contain}
-.poster-photo-daily{right:38px;top:190px;width:137px;transform:rotate(4deg)}.poster-photo-daily>span{height:205px;position:relative;padding:0;border:5px solid #fff}.poster-photo-daily img{position:absolute;left:50%;top:-4%;height:126.7%;width:auto;max-width:none;transform:translateX(-50%);object-fit:fill}
-.poster-folder{position:absolute;width:68px;height:49px;background:radial-gradient(circle,#d7aabb 0 1px,transparent 1.5px) 6px 5px/10px 10px,#f5e7ef;border-radius:5px;box-shadow:0 2px 6px #83727b18;z-index:3}.poster-folder:before{content:'';position:absolute;top:-9px;left:0;width:28px;height:13px;border-radius:6px 6px 0 0;background:#f5e7ef}.folder-one{left:51px;top:329px;transform:rotate(-4deg)}.folder-two{right:37px;top:395px;transform:rotate(6deg)}
-.poster-player{position:absolute;right:57px;bottom:137px;display:flex;align-items:center;gap:6px;width:310px;padding:16px 14px;border-radius:52px;background:linear-gradient(#fff,#e4e2e2);box-shadow:inset 0 0 0 1px #c9c5c7,0 4px 8px #74717020;z-index:3}
-.poster-player>button{border:0;background:transparent;color:#8b858c;font:25px Georgia,serif;padding:1px 5px}.poster-player>.poster-play{font:14px DM,sans-serif;border:1px solid #cec7ce;border-radius:50%;width:31px;height:31px;padding:0;background:#fff8}
-.poster-track{flex:1;margin-left:9px;text-align:center;background:linear-gradient(#faf3f9,#eddfeb);border:1px solid #d6c8d2;border-radius:40px;padding:10px 13px}.poster-look-title{font-size:11px}.poster-track-line{display:block;background:#e2d1df;height:4px;border-radius:5px;margin:8px 0 5px;overflow:hidden}.poster-track-line i{display:block;width:20%;height:100%;background:#c594b2;transition:width .3s}.poster-track-count{font:8px DM,sans-serif;letter-spacing:1px;color:#a493a4}
-.poster-headline{position:absolute;left:44px;bottom:32px;z-index:4;transform:rotate(-5deg);pointer-events:none}.poster-headline .script{display:block;color:#e7a1bd;-webkit-text-stroke:.5px #696467;text-shadow:2px 2px 0 #fff,4px 4px 0 #ddd2d8;font-size:68px;line-height:.85}.poster-headline strong{display:block;color:#e7a1bd;-webkit-text-stroke:1px #fff;text-shadow:2px 2px 0 #6a6269;font:bold italic 41px Georgia,serif;line-height:1.25;margin-left:66px}.poster-headline small{display:block;font-size:10px;letter-spacing:2px;margin-left:94px;color:#9c7b8b}
-.poster-to-lookbook{position:absolute;right:73px;bottom:61px;background:#fffdfde8;color:#9b7589;padding:7px 15px;border-bottom:1px solid #d6b4c8;font:9px DM,sans-serif;letter-spacing:1px;z-index:3}.poster-to-lookbook:hover{background:#f6e4ee}
+/* Outfit diary: the same cream paper, blush keepsakes and mint lettering as the report. */
+.style-poster{background:var(--paper);color:var(--ink);isolation:isolate}
+.style-poster:before{content:'';position:absolute;right:-58px;top:70px;width:300px;height:565px;background:#f0d3cc;transform:rotate(9deg);z-index:-1;opacity:.6}
+.poster-browser{position:absolute;top:33px;left:43px;right:43px;display:flex;align-items:center;justify-content:space-between;z-index:4}
+.poster-next-page{font-size:10px;letter-spacing:1px;transform:rotate(2deg)}
+.poster-headline{position:absolute;left:43px;top:64px;z-index:3;pointer-events:none}
+.poster-headline h2.script{font-size:91px;margin:0;color:var(--mint);-webkit-text-stroke:.65px var(--ink);text-shadow:1.5px 2px 0 var(--ink);line-height:1.2;font-weight:400}
+.poster-headline small{display:block;font-size:12px;letter-spacing:2px;color:var(--muted);margin:4px 0 0 17px}
+.poster-notes{position:absolute;left:62px;top:252px;width:264px;padding:23px 24px 22px;background:#f2d8d0;border:1px solid #dfbdb3;transform:rotate(-3deg);box-shadow:3px 5px 0 #d8b4aa33;z-index:2}
+.poster-notes:before{content:'';position:absolute;top:-12px;left:86px;width:80px;height:26px;background:#e2d8c79e;transform:rotate(4deg)}
+.poster-notes-title{display:block;font-size:9px;letter-spacing:2px;margin:0 0 13px;color:var(--muted)}
+.poster-notes p{font-size:17px;line-height:1.8;margin:0 0 13px;text-align:left}
+.poster-highlight{display:inline-block;font:italic 12px Georgia,serif;line-height:1.7;color:#a3777b;border-bottom:1px solid #cfa6a2}
+.poster-main{position:absolute;left:375px;top:105px;width:412px;height:523px;z-index:1}
+.poster-backpaper{position:absolute;inset:4px 18px 5px;background:var(--pink);border:1px solid #d8b9b3;border-radius:195px 195px 16px 16px;transform:rotate(2deg);box-shadow:6px 8px 0 #d8b4aa30}
+.poster-backpaper:before{content:'';position:absolute;inset:12px;border:1px solid #fff4e9b3;border-radius:183px 183px 8px 8px}
+.poster-main-photo{position:absolute;left:50%;bottom:9px;height:97%;width:auto;max-width:none;transform:translateX(-50%);filter:drop-shadow(2px 3px 0 #a579791c)}
+.poster-zoom{position:absolute;right:14px;top:251px;z-index:2;background:var(--paper);border:1px solid #cba99f;border-radius:50%;width:32px;height:32px;color:#9b6f76;font-size:19px;transition:transform .2s,background .2s}
+.poster-zoom:hover{transform:scale(1.12);background:#fff9e8}
+.poster-photo{position:absolute;border:1px solid #c7afa1;background:#fff9e8;padding:7px 7px 16px;z-index:2;box-shadow:4px 5px 0 #d8b4aa40;transition:transform .3s,box-shadow .3s}
+.poster-photo:before{content:'';position:absolute;top:-13px;left:28%;width:62px;height:26px;background:#e6d7c49c;transform:rotate(-4deg);z-index:1}
+.poster-photo>span{display:block;overflow:hidden;position:relative;background:#efdbce}
+.poster-photo img{width:100%;height:100%;object-fit:cover;filter:none}
+.poster-photo small{display:block;font:italic 10px Georgia,serif;text-align:center;color:#9b7b77;margin-top:8px}
+.poster-photo:hover{transform:translateY(-5px) rotate(0deg);box-shadow:5px 9px 0 #d8b4aa40}
+.poster-photo-beach{left:230px;top:439px;width:140px;transform:rotate(5deg)}
+.poster-photo-beach>span{height:145px}.poster-photo-beach img{object-position:50% 28%}
+.poster-photo-cherry{right:184px;top:125px;width:139px;transform:rotate(-5deg)}
+.poster-photo-cherry>span{height:204px}.poster-photo-cherry img{height:100%;width:auto;max-width:none;position:absolute;left:50%;top:0;transform:translateX(-50%);object-fit:contain}
+.poster-photo-daily{right:48px;top:268px;width:143px;transform:rotate(5deg)}
+.poster-photo-daily>span{height:200px}.poster-photo-daily img{position:absolute;left:50%;top:-4%;height:126.7%;width:auto;max-width:none;transform:translateX(-50%);object-fit:fill}
+.poster-player{position:absolute;right:64px;bottom:84px;display:flex;align-items:center;gap:8px;width:304px;padding:12px 14px;background:#fff9e8;border:1px solid #d5b5aa;border-radius:40px;z-index:3}
+.poster-player>button{border:0;background:transparent;color:#8c686c;font:26px Georgia,serif;padding:1px 4px}
+.poster-player>.poster-play{font:12px DM,sans-serif;border:1px solid #d3aba5;border-radius:50%;width:31px;height:31px;padding:0;background:var(--pink)}
+.poster-track{flex:1;margin-left:10px;text-align:center}.poster-look-title{font-size:12px}
+.poster-track-line{display:block;background:#edd9d1;height:3px;border-radius:5px;margin:8px 0 5px;overflow:hidden}
+.poster-track-line i{display:block;width:20%;height:100%;background:#ac7b84;transition:width .3s}
+.poster-track-count{font:8px DM,sans-serif;letter-spacing:1px;color:var(--muted)}
+.poster-to-lookbook{position:absolute;right:80px;bottom:45px;color:var(--muted);padding:4px 0;border-bottom:1px solid #b9948b;font:9px DM,sans-serif;letter-spacing:1px;z-index:3}
+.poster-to-lookbook:hover{color:#a3777b}
+.style-poster button:focus-visible,.style-poster a:focus-visible{outline:2px solid #a3777b;outline-offset:5px}
 @media(prefers-reduced-motion:reduce){.poster-photo,.poster-zoom,.poster-track-line i{transition:none}.poster-photo:hover{transform:none}}
